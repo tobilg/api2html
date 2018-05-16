@@ -1,0 +1,43 @@
+{
+  "name": "api2html",
+  "version": "0.1.0",
+  "description": "A CLI tool to transform Swagger/OpenAPI/AsyncAPI docs to beautiful HTML pages via Shin/Widdershin.",
+  "main": "bin/api2html.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "api2html": "bin/api2html.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobilg/api2html.git"
+  },
+  "keywords": [
+    "swagger",
+    "openapi",
+    "openapi3",
+    "asyncapi",
+    "slate",
+    "shins",
+    "api",
+    "docs",
+    "documentation",
+    "transform"
+  ],
+  "author": {
+    "name": "TobiLG",
+    "email": "tobilg@gmail.com",
+    "url": "https://github.com/tobilg"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tobilg/api2html/issues"
+  },
+  "homepage": "https://github.com/tobilg/api2html#readme",
+  "dependencies": {
+    "commander": "^2.15.1",
+    "shins": "^2.2.1-5",
+    "widdershins": "^3.4.0"
+  }
+}
