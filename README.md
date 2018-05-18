@@ -43,7 +43,7 @@ $ api2html --help
     -t, --theme <themeName>         theme to use (see https://highlightjs.org/static/demo/ for a list)
     -c, --customLogo <logoPath>     use custom logo at the respective path
     -i, --includes <includesList>   comma-separated list of files to include
-    -l, --languages <languageList>  comma-separated list of languages to use for the language tabs (out of shell, http,                                   javascript, javascript--nodejs, ruby, python, java, go)
+    -l, --languages <languageList>  comma-separated list of languages to use for the language tabs (out of shell, http, javascript, javascript--nodejs, ruby, python, java, go)
     -s, --search                    enable search
     -h, --help                      output usage information
 ```
