@@ -1,5 +1,7 @@
 # api2html
-A CLI tool to transform Swagger/OpenAPI/AsyncAPI docs to beautiful HTML pages via Shin/Widdershin.
+A CLI tool to transform Swagger/OpenAPI/AsyncAPI docs to beautiful HTML pages via [Shins](https://github.com/mermade/shins)/[Widdershins](https://github.com/mermade/widdershins).
+
+You can find an example generated page at [http://tobilg.github.io/api2html/petstore/](http://tobilg.github.io/api2html/petstore/).
 
 ## Installation
 
@@ -7,6 +9,22 @@ To install `api2html` globally, use
 
 ```bash
 $ npm i api2html -g
+```
+
+You can also install it to use as `devDependencies`, and use it locally via a `npm run` task in your `package.json`:
+
+```bash
+$ npm i api2html --save-dev
+```
+
+Usage in `package.json`:
+
+```javascript
+{
+  "scripts": {
+    "api-docs": "node_modules/.bin/api2html -o docs/api.html -l shell,javascript--nodejs docs/openapi/api.yml"
+  }
+}
 ```
 
 ## Usage
