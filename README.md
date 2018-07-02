@@ -39,6 +39,7 @@ $ api2html --help
   Options:
 
     -V, --version                   output the version number
+    -r, --resolve <source>          resolve external dependencies, source should be a url or a path
     -o, --out <outputPath>          output path for the resulting HTML document
     -t, --theme <themeName>         theme to use (see https://highlightjs.org/static/demo/ for a list)
     -c, --customLogo <logoPath>     use custom logo at the respective path
@@ -80,4 +81,12 @@ This will render the `api.yml` file in the current directory as `myapi.html` fil
 
 ```bash
 $ api2html -o myapi.html -l go,javascript -t arta myapi.yml
+```
+
+#### Resolve external dependencies
+
+If you add refs to external files in your source file, you can enable them by using `-r <source>`. The following command will resolve all your relative imports from the current directory.
+
+```bash
+$ api2html -o myapi.html -r ./ myapi.yml
 ```
