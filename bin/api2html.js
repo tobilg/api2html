@@ -30,6 +30,7 @@ const icons = {
 program
     .version(pkg.version)
     .usage("[options] <sourcePath>")
+    .option("-r, --resolve <source>", "resolve external dependencies, source should be a url or a path")
     .option("-o, --out <outputPath>", "output path for the resulting HTML document")
     .option("-t, --theme <themeName>", "theme to use (see https://highlightjs.org/static/demo/ for a list)")
     .option("-c, --customLogo <logoPath>", "use custom logo at the respective path")
@@ -62,13 +63,18 @@ if (program.args.length === 0) {
     options.headings = 2;
     options.verbose = false;
 
+    if (program.resolve) {
+        options.resolve = true;
+        options.source = program.resolve;
+    }
+
     if (program.includes) {
         options.includes = program.includes.split(",");
     }
 
     if (program.languages) {
         const temp = program.languages.split(",");
-        let tempLanguages = []; 
+        let tempLanguages = [];
         temp.forEach((lang) => {
             if (Object.getOwnPropertyNames(languageMap).indexOf(lang.toLowerCase()) > -1) {
                 tempLanguages.push(lang);
@@ -87,7 +93,7 @@ if (program.args.length === 0) {
             });
         }
     }
-    
+
     // Shin options
     let shinOptions = {};
     shinOptions.inline = true;
@@ -104,43 +110,43 @@ if (program.args.length === 0) {
 
         // Read source file
         const file = fs.readFileSync(path.resolve(program.args[0]), "utf8");
-        
+
         console.log(chalk.green(icons.ok) + " Read source file!");
-        
+
         try {
-        
-            // Load source yaml 
+
+            // Load source yaml
             api = yaml.safeLoad(file, { json: true });
 
             // Convert the yaml to markdown for usage with Shin
             converter.convert(api, options, (err, markdownString) => {
-        
+
                 if (err) {
                     console.log(chalk.red(icons.fail) + " Error during conversion via Widdershin:");
                     console.log(err.message);
                     process.exit(-1);
                 }
-        
+
                 console.log(chalk.green(icons.ok) + " Converted OpenAPI docs to markdown!");
-                
+
                 // Render the markdown as HTML and inline all the assets
                 shins.render(markdownString, shinOptions, (err, html) => {
-        
+
                     if (err) {
                         console.log(chalk.red(icons.fail) + " Error during rendering via Shin:");
                         console.log(err.message);
                         process.exit(-1);
                     }
-        
+
                     console.log(chalk.green(icons.ok) + " Rendered HTML form markdown!");
-        
+
                     try {
-        
+
                         // Write output file
                         fs.writeFileSync(path.resolve(program.out), html, "utf8");
-        
+
                         console.log(chalk.green(icons.ok) + " Wrote output file!");
-        
+
                     } catch (err) {
                         console.log(chalk.red(icons.fail) + " Failed to write output file:");
                         console.log(err.message);
@@ -148,9 +154,9 @@ if (program.args.length === 0) {
                     } finally {
                         console.log(chalk.green(icons.ok) + " Finished!");
                     }
-              
+
                   });
-              
+
               });
 
           }
