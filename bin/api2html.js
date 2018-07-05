@@ -37,6 +37,7 @@ program
     .option("-i, --includes <includesList>", "comma-separated list of files to include")
     .option("-l, --languages <languageList>", "comma-separated list of languages to use for the language tabs (out of " + Object.getOwnPropertyNames(languageMap).join(", ") + ")")
     .option("-s, --search", "enable search")
+	.option("-b, --omitBody", "Omit top-level fake body parameter object")
     .parse(process.argv);
 
 if (program.args.length === 0) {
@@ -62,6 +63,7 @@ if (program.args.length === 0) {
     options.summary = false;
     options.headings = 2;
     options.verbose = false;
+	options.omitBody = program.omitBody || false;
 
     if (program.resolve) {
         options.resolve = true;
