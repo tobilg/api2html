@@ -37,7 +37,8 @@ program
     .option("-i, --includes <includesList>", "comma-separated list of files to include")
     .option("-l, --languages <languageList>", "comma-separated list of languages to use for the language tabs (out of " + Object.getOwnPropertyNames(languageMap).join(", ") + ")")
     .option("-s, --search", "enable search")
-	.option("-b, --omitBody", "Omit top-level fake body parameter object")
+    .option("-m, --summary", "use summary instead of operationId for TOC")
+	  .option("-b, --omitBody", "Omit top-level fake body parameter object")
     .parse(process.argv);
 
 if (program.args.length === 0) {
@@ -60,10 +61,10 @@ if (program.args.length === 0) {
     options.search = program.search || true;
     options.discovery = false;
     options.shallowSchemas = false;
-    options.summary = false;
+    options.tocSummary = program.summary;
     options.headings = 2;
     options.verbose = false;
-	options.omitBody = program.omitBody || false;
+	  options.omitBody = program.omitBody || false;
 
     if (program.resolve) {
         options.resolve = true;
