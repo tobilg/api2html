@@ -25,7 +25,7 @@ const languageMap = {
 const icons = {
     ok: "✓",
     fail: "✗"
-}
+};
 
 program
     .version(pkg.version)
@@ -38,7 +38,7 @@ program
     .option("-l, --languages <languageList>", "comma-separated list of languages to use for the language tabs (out of " + Object.getOwnPropertyNames(languageMap).join(", ") + ")")
     .option("-s, --search", "enable search")
     .option("-m, --summary", "use summary instead of operationId for TOC")
-	  .option("-b, --omitBody", "Omit top-level fake body parameter object")
+    .option("-b, --omitBody", "Omit top-level fake body parameter object")
     .parse(process.argv);
 
 if (program.args.length === 0) {
@@ -64,7 +64,15 @@ if (program.args.length === 0) {
     options.tocSummary = program.summary;
     options.headings = 2;
     options.verbose = false;
-	  options.omitBody = program.omitBody || false;
+    options.omitBody = program.omitBody || false;
+    options.language_tabs = [];
+
+    // Default languages: All
+    Object.getOwnPropertyNames(languageMap).forEach((lang) => {
+        let obj = {};
+        obj[lang] = languageMap[lang];
+        options.language_tabs.push(obj);
+    });
 
     if (program.resolve) {
         options.resolve = true;
@@ -88,7 +96,8 @@ if (program.args.length === 0) {
             }
         });
         if (tempLanguages.length > 0) {
-            options.language_tabs = [];
+            // Reset languages
+            options.language_tabs.length = 0;
             tempLanguages.forEach((lang) => {
                 let obj = {};
                 obj[lang] = languageMap[lang];
