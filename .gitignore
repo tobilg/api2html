@@ -62,3 +62,5 @@ typings/
 
 # Output files
 out/
+
+.idea
