@@ -39,6 +39,7 @@ program
     .option("-s, --search", "enable search")
     .option("-m, --summary", "use summary instead of operationId for TOC")
     .option("-b, --omitBody", "Omit top-level fake body parameter object")
+    .option("-R, --raw", "Show raw schemas in samples, not example values")
     .parse(process.argv);
 
 if (program.args.length === 0) {
@@ -66,6 +67,7 @@ if (program.args.length === 0) {
     options.verbose = false;
     options.omitBody = program.omitBody || false;
     options.language_tabs = [];
+    options.sample = !program.raw;
 
     // Default languages: All
     Object.getOwnPropertyNames(languageMap).forEach((lang) => {
