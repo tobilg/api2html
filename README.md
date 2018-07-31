@@ -48,6 +48,7 @@ $ api2html --help
     -s, --search                    enable search
     -m, --summary                   use summary instead of operationId for TOC
     -b, --omitBody                  Omit top-level fake body parameter object
+    -R, --raw                       Show raw schemas in samples, not example values
     -h, --help                      output usage information
 ```
 
