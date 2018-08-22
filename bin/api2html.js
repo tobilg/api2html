@@ -27,6 +27,10 @@ const icons = {
     fail: "✗"
 };
 
+function isDict(v) {
+    typeof v==='object' && v!==null && !(v instanceof Array) && !(v instanceof Date);
+}
+
 program
     .version(pkg.version)
     .usage("[options] <sourcePath>")
@@ -35,7 +39,7 @@ program
     .option("-t, --theme <themeName>", "theme to use (see https://highlightjs.org/static/demo/ for a list)")
     .option("-c, --customLogo <logoPath>", "use custom logo at the respective path")
     .option("-i, --includes <includesList>", "comma-separated list of files to include")
-    .option("-l, --languages <languageList>", "comma-separated list of languages to use for the language tabs (out of " + Object.getOwnPropertyNames(languageMap).join(", ") + ")")
+    .option("-l, --languages <languageList>", "comma-separated list of languages to use for the language tabs (out of " + Object.getOwnPropertyNames(languageMap).join(", ") + "), or a JSON string such as '[{\"shell\": \"Examples\"}]'")
     .option("-s, --search", "enable search")
     .option("-m, --summary", "use summary instead of operationId for TOC")
     .option("-b, --omitBody", "Omit top-level fake body parameter object")
@@ -86,25 +90,34 @@ if (program.args.length === 0) {
     }
 
     if (program.languages) {
-        const temp = program.languages.split(",");
-        let tempLanguages = [];
-        temp.forEach((lang) => {
-            if (Object.getOwnPropertyNames(languageMap).indexOf(lang.toLowerCase()) > -1) {
-                tempLanguages.push(lang);
-            } else {
-                console.log(lang);
-                console.log(chalk.red(icons.fail) + " Invalid language '" + lang + "'. Please specify valid languages (such as " + Object.getOwnPropertyNames(languageMap).join(", ") + ").");
-                process.exit(-1);
-            }
-        });
-        if (tempLanguages.length > 0) {
-            // Reset languages
-            options.language_tabs.length = 0;
-            tempLanguages.forEach((lang) => {
-                let obj = {};
-                obj[lang] = languageMap[lang];
-                options.language_tabs.push(obj);
+        var languagesDict;
+        try {
+            languagesDict = JSON.parse(program.languages);
+        } catch (e) { }
+
+        if (languagesDict) {
+            options.language_tabs = languagesDict;
+        } else {
+            const temp = program.languages.split(",");
+            let tempLanguages = [];
+            temp.forEach((lang) => {
+                if (Object.getOwnPropertyNames(languageMap).indexOf(lang.toLowerCase()) > -1) {
+                    tempLanguages.push(lang);
+                } else {
+                    console.log(lang);
+                    console.log(chalk.red(icons.fail) + " Invalid language '" + lang + "'. Please specify valid languages (such as " + Object.getOwnPropertyNames(languageMap).join(", ") + ").");
+                    process.exit(-1);
+                }
             });
+            if (tempLanguages.length > 0) {
+                // Reset languages
+                options.language_tabs.length = 0;
+                tempLanguages.forEach((lang) => {
+                    let obj = {};
+                    obj[lang] = languageMap[lang];
+                    options.language_tabs.push(obj);
+                });
+            }
         }
     }
 
