@@ -34,6 +34,7 @@ program
     .option("-o, --out <outputPath>", "output path for the resulting HTML document")
     .option("-t, --theme <themeName>", "theme to use (see https://highlightjs.org/static/demo/ for a list)")
     .option("-c, --customLogo <logoPath>", "use custom logo at the respective path")
+    .option("-s, --customCss", "use custom css")
     .option("-i, --includes <includesList>", "comma-separated list of files to include")
     .option("-l, --languages <languageList>", "comma-separated list of languages to use for the language tabs (out of " + Object.getOwnPropertyNames(languageMap).join(", ") + ")")
     .option("-s, --search", "enable search")
@@ -116,6 +117,11 @@ if (program.args.length === 0) {
     // Check for custom logo option
     if (program.customLogo) {
         shinOptions.logo = program.customLogo;
+    }
+
+    // Check for custom css option
+    if (program.customCss) {
+        shinOptions.customCss = true;
     }
 
     let api = null;
