@@ -34,11 +34,11 @@ program
     .option("-o, --out <outputPath>", "output path for the resulting HTML document")
     .option("-t, --theme <themeName>", "theme to use (see https://highlightjs.org/static/demo/ for a list)")
     .option("-c, --customLogo <logoPath>", "use custom logo at the respective path")
-    .option("-s, --customCss", "use custom css")
+    .option("-C, --customCss", "use custom css")
     .option("-i, --includes <includesList>", "comma-separated list of files to include")
     .option("-l, --languages <languageList>", "comma-separated list of languages to use for the language tabs (out of " + Object.getOwnPropertyNames(languageMap).join(", ") + ")")
     .option("-s, --search", "enable search")
-    .option("-m, --summary", "use summary instead of operationId for TOC")
+    .option("-S, --summary", "use summary instead of operationId for TOC")
     .option("-b, --omitBody", "Omit top-level fake body parameter object")
     .option("-R, --raw", "Show raw schemas in samples, not example values")
     .parse(process.argv);
