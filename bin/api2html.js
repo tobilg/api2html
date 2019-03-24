@@ -19,7 +19,8 @@ const languageMap = {
     "ruby": "Ruby",
     "python": "Python",
     "java": "Java",
-    "go": "Go"
+    "go": "Go",
+    "php: "PHP"
 };
 
 const icons = {
