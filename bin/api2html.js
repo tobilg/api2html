@@ -20,7 +20,7 @@ const languageMap = {
     "python": "Python",
     "java": "Java",
     "go": "Go",
-    "php: "PHP"
+    "php": "PHP"
 };
 
 const icons = {
