@@ -36,6 +36,7 @@ program
     .option("-t, --theme <themeName>", "theme to use (see https://highlightjs.org/static/demo/ for a list)")
     .option("-c, --customLogo <logoPath>", "use custom logo at the respective path")
     .option("-C, --customCss", "use custom css")
+    .option("-P, --customCssPath <cssPath>", "use custom css file")
     .option("-i, --includes <includesList>", "comma-separated list of files to include")
     .option("-l, --languages <languageList>", "comma-separated list of languages to use for the language tabs (out of " + Object.getOwnPropertyNames(languageMap).join(", ") + ")")
     .option("-s, --search", "enable search")
@@ -124,6 +125,20 @@ if (program.args.length === 0) {
     if (program.customCss) {
         shinOptions.customCss = true;
     }
+    
+    let customCss = "";
+    if (program.customCssPath) {
+        shinOptions.customCss = true;
+
+        try {
+            customCss = fs.readFileSync(path.resolve(program.customCssPath), "utf8");
+            console.log(chalk.green(icons.ok) + " Read custom css file!");
+        }
+        catch (error) {
+            console.log(chalk.red(icons.fail) + " Error loading custom css file:");
+            console.log(err.message);
+        }
+    }
 
     let api = null;
 
@@ -160,6 +175,10 @@ if (program.args.length === 0) {
                     }
 
                     console.log(chalk.green(icons.ok) + " Rendered HTML form markdown!");
+                    
+                    if (customCss) {
+                        html = html.replace (/\/\* place your custom CSS overrides here \*\//i, customCss);
+                    }
 
                     try {
 
