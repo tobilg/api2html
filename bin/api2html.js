@@ -35,7 +35,7 @@ program
     .option("-o, --out <outputPath>", "output path for the resulting HTML document")
     .option("-t, --theme <themeName>", "theme to use (see https://highlightjs.org/static/demo/ for a list)")
     .option("-c, --customLogo <logoPath>", "use custom logo at the respective path")
-    .option("-u, --customLogoUrl <logoURL>", "Url for the custom logo to point to")
+    .option("-u, --customLogoUrl <logoURL>", "url for the custom logo to point to")
     .option("-C, --customCss", "use custom css")
     .option("-P, --customCssPath <cssPath>", "use custom css file")
     .option("-i, --includes <includesList>", "comma-separated list of files to include")
