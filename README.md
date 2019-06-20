@@ -41,6 +41,7 @@ Usage: api2html [options] <sourcePath>
     -o, --out <outputPath>          output path for the resulting HTML document
     -t, --theme <themeName>         theme to use (see https://highlightjs.org/static/demo/ for a list)
     -c, --customLogo <logoPath>     use custom logo at the respective path
+    -u, --customLogoUrl <logoURL>   url for the custom logo to point to
     -C, --customCss                 use custom css
     -P, --customCssPath <cssPath>   use custom css file
     -i, --includes <includesList>   comma-separated list of files to include
