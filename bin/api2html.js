@@ -180,7 +180,7 @@ if (program.args.length === 0) {
                         process.exit(-1);
                     }
 
-                    console.log(chalk.green(icons.ok) + " Rendered HTML form markdown!");
+                    console.log(chalk.green(icons.ok) + " Rendered HTML from markdown!");
                     
                     if (customCss) {
                         html = html.replace (/\/\* place your custom CSS overrides here \*\//i, customCss);
