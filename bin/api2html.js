@@ -19,7 +19,8 @@ const languageMap = {
     "ruby": "Ruby",
     "python": "Python",
     "java": "Java",
-    "go": "Go"
+    "go": "Go",
+    "php": "PHP"
 };
 
 const icons = {
@@ -34,11 +35,13 @@ program
     .option("-o, --out <outputPath>", "output path for the resulting HTML document")
     .option("-t, --theme <themeName>", "theme to use (see https://highlightjs.org/static/demo/ for a list)")
     .option("-c, --customLogo <logoPath>", "use custom logo at the respective path")
-    .option("-s, --customCss", "use custom css")
+    .option("-u, --customLogoUrl <logoURL>", "url for the custom logo to point to")
+    .option("-C, --customCss", "use custom css")
+    .option("-P, --customCssPath <cssPath>", "use custom css file")
     .option("-i, --includes <includesList>", "comma-separated list of files to include")
     .option("-l, --languages <languageList>", "comma-separated list of languages to use for the language tabs (out of " + Object.getOwnPropertyNames(languageMap).join(", ") + ")")
     .option("-s, --search", "enable search")
-    .option("-m, --summary", "use summary instead of operationId for TOC")
+    .option("-S, --summary", "use summary instead of operationId for TOC")
     .option("-b, --omitBody", "Omit top-level fake body parameter object")
     .option("-R, --raw", "Show raw schemas in samples, not example values")
     .option("-T, --templates <dir>", "use custom widdershin templates from the given directory")
@@ -122,11 +125,30 @@ if (program.args.length === 0) {
     // Check for custom logo option
     if (program.customLogo) {
         shinOptions.logo = program.customLogo;
+
+        // Check for logo url option
+        if (program.customLogoUrl) {
+            shinOptions['logo-url'] = program.customLogoUrl;
+        }
     }
 
     // Check for custom css option
     if (program.customCss) {
         shinOptions.customCss = true;
+    }
+    
+    let customCss = "";
+    if (program.customCssPath) {
+        shinOptions.customCss = true;
+
+        try {
+            customCss = fs.readFileSync(path.resolve(program.customCssPath), "utf8");
+            console.log(chalk.green(icons.ok) + " Read custom css file!");
+        }
+        catch (error) {
+            console.log(chalk.red(icons.fail) + " Error loading custom css file:");
+            console.log(err.message);
+        }
     }
 
     let api = null;
@@ -163,7 +185,11 @@ if (program.args.length === 0) {
                         process.exit(-1);
                     }
 
-                    console.log(chalk.green(icons.ok) + " Rendered HTML form markdown!");
+                    console.log(chalk.green(icons.ok) + " Rendered HTML from markdown!");
+                    
+                    if (customCss) {
+                        html = html.replace (/\/\* place your custom CSS overrides here \*\//i, customCss);
+                    }
 
                     try {
 

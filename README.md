@@ -32,21 +32,22 @@ Usage in `package.json`:
 ### Available commands
 
 ```bash
-$ api2html --help
-
-  Usage: api2html [options] <sourcePath>
-
+$ api2html --help 
+Usage: api2html [options] <sourcePath>
+  
   Options:
-
     -V, --version                   output the version number
     -r, --resolve <source>          resolve external dependencies, source should be a url or a path
     -o, --out <outputPath>          output path for the resulting HTML document
     -t, --theme <themeName>         theme to use (see https://highlightjs.org/static/demo/ for a list)
     -c, --customLogo <logoPath>     use custom logo at the respective path
+    -u, --customLogoUrl <logoURL>   url for the custom logo to point to
+    -C, --customCss                 use custom css
+    -P, --customCssPath <cssPath>   use custom css file
     -i, --includes <includesList>   comma-separated list of files to include
     -l, --languages <languageList>  comma-separated list of languages to use for the language tabs (out of shell, http, javascript, javascript--nodejs, ruby, python, java, go)
     -s, --search                    enable search
-    -m, --summary                   use summary instead of operationId for TOC
+    -S, --summary                   use summary instead of operationId for TOC
     -b, --omitBody                  Omit top-level fake body parameter object
     -R, --raw                       Show raw schemas in samples, not example values
     -h, --help                      output usage information

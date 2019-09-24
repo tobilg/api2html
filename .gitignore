@@ -62,5 +62,8 @@ typings/
 
 # Output files
 out/
+docs/.DS_Store
 
 .idea
+
+.DS_Store
