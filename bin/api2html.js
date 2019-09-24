@@ -44,6 +44,7 @@ program
     .option("-S, --summary", "use summary instead of operationId for TOC")
     .option("-b, --omitBody", "Omit top-level fake body parameter object")
     .option("-R, --raw", "Show raw schemas in samples, not example values")
+    .option("-T, --templates <dir>", "use custom widdershins templates from the given directory")
     .parse(process.argv);
 
 if (program.args.length === 0) {
@@ -72,6 +73,10 @@ if (program.args.length === 0) {
     options.omitBody = program.omitBody || false;
     options.language_tabs = [];
     options.sample = !program.raw;
+
+    if (program.templates) {
+        options.user_templates= program.templates;
+    }
 
     // Default languages: All
     Object.getOwnPropertyNames(languageMap).forEach((lang) => {
@@ -131,7 +136,7 @@ if (program.args.length === 0) {
     if (program.customCss) {
         shinOptions.customCss = true;
     }
-    
+
     let customCss = "";
     if (program.customCssPath) {
         shinOptions.customCss = true;
@@ -181,7 +186,7 @@ if (program.args.length === 0) {
                     }
 
                     console.log(chalk.green(icons.ok) + " Rendered HTML from markdown!");
-                    
+
                     if (customCss) {
                         html = html.replace (/\/\* place your custom CSS overrides here \*\//i, customCss);
                     }
