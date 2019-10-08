@@ -120,12 +120,12 @@ if (program.args.length === 0) {
     // Check for custom logo option
     if (program.customLogo) {
         shinOptions.logo = program.customLogo;
-
-        // Check for logo url option
-        if (program.customLogoUrl) {
-            shinOptions['logo-url'] = program.customLogoUrl;
-        }
     }
+    // Check for logo url option
+    if (program.customLogoUrl) {
+        shinOptions['logo-url'] = program.customLogoUrl;
+    }
+    
 
     // Check for custom css option
     if (program.customCss) {
