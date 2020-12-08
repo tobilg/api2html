@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/tobilg/api2html#readme",
   "dependencies": {
+    "chalk": "^4.1.0",
     "commander": "^2.20.0",
     "js-yaml": "^3.14.1",
     "mkdirp": "^0.5.1",
