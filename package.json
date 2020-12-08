@@ -39,7 +39,7 @@
   "dependencies": {
     "commander": "^2.20.0",
     "mkdirp": "^0.5.1",
-    "shins": "^2.3.2-4",
-    "widdershins": "^3.6.7"
+    "shins": "^2.6.0",
+    "widdershins": "^4.0.1"
   }
 }
