@@ -131,7 +131,7 @@ if (program.args.length === 0) {
     if (program.customCss) {
         shinOptions.customCss = true;
     }
-    
+
     let customCss = "";
     if (program.customCssPath) {
         shinOptions.customCss = true;
@@ -181,9 +181,9 @@ if (program.args.length === 0) {
                     }
 
                     console.log(chalk.green(icons.ok) + " Rendered HTML from markdown!");
-                    
+
                     if (customCss) {
-                        html = html.replace (/\/\* place your custom CSS overrides here \*\//i, customCss);
+                        html = html.replace(/\/\* place your custom CSS overrides here \*\//i, customCss);
                     }
 
                     try {
@@ -201,15 +201,15 @@ if (program.args.length === 0) {
                         console.log(chalk.green(icons.ok) + " Finished!");
                     }
 
-                  });
+                });
 
-              });
+            });
 
-          }
-          catch(ex) {
+        }
+        catch (ex) {
             console.error("Failed to parse the source OpenAPI document");
             process.exit(-1);
-          }
+        }
 
     } catch (err) {
         console.error("Source file wasn't found: " + program.args[0]);
