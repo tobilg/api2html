@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Swagger Petstore</title>
+    <title>Swagger Petstore v1.0.0</title>
 
     <style>
     </style>
@@ -1465,7 +1465,11 @@ Darkula color scheme from the JetBrains family of IDEs
 var n=this.pipeline.run(e.tokenizer(t)),r=new e.Vector,i=[],o=this._fields.reduce(function(e,t){return e+t.boost},0);return n.some(function(e){return this.tokenStore.has(e)},this)?(n.forEach(function(t,n,s){var a=1/s.length*this._fields.length*o,u=this,c=this.tokenStore.expand(t).reduce(function(n,i){var o=u.corpusTokens.indexOf(i),s=u.idf(i),c=1,l=new e.SortedSet;if(i!==t){var f=Math.max(3,i.length-t.length);c=1/Math.log(f)}return o>-1&&r.insert(o,a*s*c),Object.keys(u.tokenStore.get(i)).forEach(function(e){l.add(e)}),n.union(l)},new e.SortedSet);i.push(c)},this),i.reduce(function(e,t){return e.intersect(t)}).map(function(e){return{ref:e,score:r.similarity(this.documentVector(e))}},this).sort(function(e,t){return t.score-e.score})):[]},e.Index.prototype.documentVector=function(t){for(var n=this.documentStore.get(t),r=n.length,i=new e.Vector,o=0;o<r;o++){var s=n.elements[o],a=this.tokenStore.get(s)[t].tf,u=this.idf(s);i.insert(this.corpusTokens.indexOf(s),a*u)}return i},e.Index.prototype.toJSON=function(){return{version:e.version,fields:this._fields,ref:this._ref,documentStore:this.documentStore.toJSON(),tokenStore:this.tokenStore.toJSON(),corpusTokens:this.corpusTokens.toJSON(),pipeline:this.pipeline.toJSON()}},e.Index.prototype.use=function(e){var t=Array.prototype.slice.call(arguments,1);t.unshift(this),e.apply(this,t)},e.Store=function(){this.store={},this.length=0},e.Store.load=function(t){var n=new this;return n.length=t.length,n.store=Object.keys(t.store).reduce(function(n,r){return n[r]=e.SortedSet.load(t.store[r]),n},{}),n},e.Store.prototype.set=function(e,t){this.has(e)||this.length++,this.store[e]=t},e.Store.prototype.get=function(e){return this.store[e]},e.Store.prototype.has=function(e){return e in this.store},e.Store.prototype.remove=function(e){this.has(e)&&(delete this.store[e],this.length--)},e.Store.prototype.toJSON=function(){return{store:this.store,length:this.length}},e.stemmer=function(){var e={ational:"ate",tional:"tion",enci:"ence",anci:"ance",izer:"ize",bli:"ble",alli:"al",entli:"ent",eli:"e",ousli:"ous",ization:"ize",ation:"ate",ator:"ate",alism:"al",iveness:"ive",fulness:"ful",ousness:"ous",aliti:"al",iviti:"ive",biliti:"ble",logi:"log"},t={icate:"ic",ative:"",alize:"al",iciti:"ic",ical:"ic",ful:"",ness:""},n="[aeiouy]",r="[^aeiou][^aeiouy]*",i=new RegExp("^([^aeiou][^aeiouy]*)?[aeiouy][aeiou]*[^aeiou][^aeiouy]*"),o=new RegExp("^([^aeiou][^aeiouy]*)?[aeiouy][aeiou]*[^aeiou][^aeiouy]*[aeiouy][aeiou]*[^aeiou][^aeiouy]*"),s=new RegExp("^([^aeiou][^aeiouy]*)?[aeiouy][aeiou]*[^aeiou][^aeiouy]*([aeiouy][aeiou]*)?$"),a=new RegExp("^([^aeiou][^aeiouy]*)?[aeiouy]"),u=/^(.+?)(ss|i)es$/,c=/^(.+?)([^s])s$/,l=/^(.+?)eed$/,f=/^(.+?)(ed|ing)$/,d=/.$/,p=/(at|bl|iz)$/,h=new RegExp("([^aeiouylsz])\\1$"),g=new RegExp("^"+r+n+"[^aeiouwxy]$"),v=/^(.+?[^aeiou])y$/,m=/^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/,y=/^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/,x=/^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/,b=/^(.+?)(s|t)(ion)$/,w=/^(.+?)e$/,T=/ll$/,S=new RegExp("^"+r+n+"[^aeiouwxy]$");return function(n){var r,E,C,k,N,j,A;if(n.length<3)return n;if(C=n.substr(0,1),"y"==C&&(n=C.toUpperCase()+n.substr(1)),k=u,N=c,k.test(n)?n=n.replace(k,"$1$2"):N.test(n)&&(n=n.replace(N,"$1$2")),k=l,N=f,k.test(n)){var L=k.exec(n);k=i,k.test(L[1])&&(k=d,n=n.replace(k,""))}else if(N.test(n)){var L=N.exec(n);r=L[1],N=a,N.test(r)&&(n=r,N=p,j=h,A=g,N.test(n)?n+="e":j.test(n)?(k=d,n=n.replace(k,"")):A.test(n)&&(n+="e"))}if(k=v,k.test(n)){var L=k.exec(n);r=L[1],n=r+"i"}if(k=m,k.test(n)){var L=k.exec(n);r=L[1],E=L[2],k=i,k.test(r)&&(n=r+e[E])}if(k=y,k.test(n)){var L=k.exec(n);r=L[1],E=L[2],k=i,k.test(r)&&(n=r+t[E])}if(k=x,N=b,k.test(n)){var L=k.exec(n);r=L[1],k=o,k.test(r)&&(n=r)}else if(N.test(n)){var L=N.exec(n);r=L[1]+L[2],N=o,N.test(r)&&(n=r)}if(k=w,k.test(n)){var L=k.exec(n);r=L[1],k=o,N=s,j=S,(k.test(r)||N.test(r)&&!j.test(r))&&(n=r)}return k=T,N=o,k.test(n)&&N.test(n)&&(k=d,n=n.replace(k,"")),"y"==C&&(n=C.toLowerCase()+n.substr(1)),n}}(),e.Pipeline.registerFunction(e.stemmer,"stemmer"),e.stopWordFilter=function(t){if(-1===e.stopWordFilter.stopWords.indexOf(t))return t},e.stopWordFilter.stopWords=new e.SortedSet,e.stopWordFilter.stopWords.length=119,e.stopWordFilter.stopWords.elements=["","a","able","about","across","after","all","almost","also","am","among","an","and","any","are","as","at","be","because","been","but","by","can","cannot","could","dear","did","do","does","either","else","ever","every","for","from","get","got","had","has","have","he","her","hers","him","his","how","however","i","if","in","into","is","it","its","just","least","let","like","likely","may","me","might","most","must","my","neither","no","nor","not","of","off","often","on","only","or","other","our","own","rather","said","say","says","she","should","since","so","some","than","that","the","their","them","then","there","these","they","this","tis","to","too","twas","us","wants","was","we","were","what","when","where","which","while","who","whom","why","will","with","would","yet","you","your"],e.Pipeline.registerFunction(e.stopWordFilter,"stopWordFilter"),e.trimmer=function(e){return e.replace(/^\W+/,"").replace(/\W+$/,"")},e.Pipeline.registerFunction(e.trimmer,"trimmer"),e.TokenStore=function(){this.root={docs:{}},this.length=0},e.TokenStore.load=function(e){var t=new this;return t.root=e.root,t.length=e.length,t},e.TokenStore.prototype.add=function(e,t,n){var n=n||this.root,r=e[0],i=e.slice(1);return r in n||(n[r]={docs:{}}),0===i.length?(n[r].docs[t.ref]=t,void(this.length+=1)):this.add(i,t,n[r])},e.TokenStore.prototype.has=function(e){if(!e)return!1;for(var t=this.root,n=0;n<e.length;n++){if(!t[e[n]])return!1;t=t[e[n]]}return!0},e.TokenStore.prototype.getNode=function(e){if(!e)return{};for(var t=this.root,n=0;n<e.length;n++){if(!t[e[n]])return{};t=t[e[n]]}return t},e.TokenStore.prototype.get=function(e,t){return this.getNode(e,t).docs||{}},e.TokenStore.prototype.count=function(e,t){return Object.keys(this.get(e,t)).length},e.TokenStore.prototype.remove=function(e,t){if(e){for(var n=this.root,r=0;r<e.length;r++){if(!(e[r]in n))return;n=n[e[r]]}delete n.docs[t]}},e.TokenStore.prototype.expand=function(e,t){var n=this.getNode(e),r=n.docs||{},t=t||[];return Object.keys(r).length&&t.push(e),Object.keys(n).forEach(function(n){"docs"!==n&&t.concat(this.expand(e+n,t))},this),t},e.TokenStore.prototype.toJSON=function(){return{root:this.root,length:this.length}},function(e,t){"function"==typeof define&&define.amd?define(t):"object"==typeof exports?module.exports=t():e.lunr=t()}(this,function(){return e})}(),function(){function e(){}function t(e,t){for(var n=e.length;n--;)if(e[n].listener===t)return n;return-1}function n(e){return function(){return this[e].apply(this,arguments)}}var r=e.prototype,i=this,o=i.EventEmitter;r.getListeners=function(e){var t,n,r=this._getEvents();if("object"==typeof e){t={};for(n in r)r.hasOwnProperty(n)&&e.test(n)&&(t[n]=r[n])}else t=r[e]||(r[e]=[]);return t},r.flattenListeners=function(e){var t,n=[];for(t=0;e.length>t;t+=1)n.push(e[t].listener);return n},r.getListenersAsObject=function(e){var t,n=this.getListeners(e);return n instanceof Array&&(t={},t[e]=n),t||n},r.addListener=function(e,n){var r,i=this.getListenersAsObject(e),o="object"==typeof n;for(r in i)i.hasOwnProperty(r)&&-1===t(i[r],n)&&i[r].push(o?n:{listener:n,once:!1});return this},r.on=n("addListener"),r.addOnceListener=function(e,t){return this.addListener(e,{listener:t,once:!0})},r.once=n("addOnceListener"),r.defineEvent=function(e){return this.getListeners(e),this},r.defineEvents=function(e){for(var t=0;e.length>t;t+=1)this.defineEvent(e[t]);return this},r.removeListener=function(e,n){var r,i,o=this.getListenersAsObject(e);for(i in o)o.hasOwnProperty(i)&&-1!==(r=t(o[i],n))&&o[i].splice(r,1);return this},r.off=n("removeListener"),r.addListeners=function(e,t){return this.manipulateListeners(!1,e,t)},r.removeListeners=function(e,t){return this.manipulateListeners(!0,e,t)},r.manipulateListeners=function(e,t,n){var r,i,o=e?this.removeListener:this.addListener,s=e?this.removeListeners:this.addListeners;if("object"!=typeof t||t instanceof RegExp)for(r=n.length;r--;)o.call(this,t,n[r]);else for(r in t)t.hasOwnProperty(r)&&(i=t[r])&&("function"==typeof i?o.call(this,r,i):s.call(this,r,i));return this},r.removeEvent=function(e){var t,n=typeof e,r=this._getEvents();if("string"===n)delete r[e];else if("object"===n)for(t in r)r.hasOwnProperty(t)&&e.test(t)&&delete r[t];else delete this._events;return this},r.removeAllListeners=n("removeEvent"),r.emitEvent=function(e,t){var n,r,i,o=this.getListenersAsObject(e);for(i in o)if(o.hasOwnProperty(i))for(r=o[i].length;r--;)n=o[i][r],!0===n.once&&this.removeListener(e,n.listener),n.listener.apply(this,t||[])===this._getOnceReturnValue()&&this.removeListener(e,n.listener);return this},r.trigger=n("emitEvent"),r.emit=function(e){var t=Array.prototype.slice.call(arguments,1);return this.emitEvent(e,t)},r.setOnceReturnValue=function(e){return this._onceReturnValue=e,this},r._getOnceReturnValue=function(){return!this.hasOwnProperty("_onceReturnValue")||this._onceReturnValue},r._getEvents=function(){return this._events||(this._events={})},e.noConflict=function(){return i.EventEmitter=o,e},"function"==typeof define&&define.amd?define("eventEmitter/EventEmitter",[],function(){return e}):"object"==typeof module&&module.exports?module.exports=e:this.EventEmitter=e}.call(this),function(e){function t(t){var n=e.event;return n.target=n.target||n.srcElement||t,n}var n=document.documentElement,r=function(){};n.addEventListener?r=function(e,t,n){e.addEventListener(t,n,!1)}:n.attachEvent&&(r=function(e,n,r){e[n+r]=r.handleEvent?function(){var n=t(e);r.handleEvent.call(r,n)}:function(){var n=t(e);r.call(e,n)},e.attachEvent("on"+n,e[n+r])});var i=function(){};n.removeEventListener?i=function(e,t,n){e.removeEventListener(t,n,!1)}:n.detachEvent&&(i=function(e,t,n){e.detachEvent("on"+t,e[t+n]);try{delete e[t+n]}catch(r){e[t+n]=void 0}});var o={bind:r,unbind:i};"function"==typeof define&&define.amd?define("eventie/eventie",o):e.eventie=o}(this),function(e,t){"function"==typeof define&&define.amd?define(["eventEmitter/EventEmitter","eventie/eventie"],function(n,r){return t(e,n,r)}):"object"==typeof exports?module.exports=t(e,require("wolfy87-eventemitter"),require("eventie")):e.imagesLoaded=t(e,e.EventEmitter,e.eventie)}(window,function(e,t,n){function r(e,t){for(var n in t)e[n]=t[n];return e}function i(e){return"[object Array]"===d.call(e)}function o(e){var t=[];if(i(e))t=e;else if("number"==typeof e.length)for(var n=0,r=e.length;r>n;n++)t.push(e[n]);else t.push(e);return t}function s(e,t,n){if(!(this instanceof s))return new s(e,t);"string"==typeof e&&(e=document.querySelectorAll(e)),this.elements=o(e),this.options=r({},this.options),"function"==typeof t?n=t:r(this.options,t),n&&this.on("always",n),this.getImages(),c&&(this.jqDeferred=new c.Deferred);var i=this;setTimeout(function(){i.check()})}function a(e){this.img=e}function u(e){this.src=e,p[e]=this}var c=e.jQuery,l=e.console,f=void 0!==l,d=Object.prototype.toString;s.prototype=new t,s.prototype.options={},s.prototype.getImages=function(){this.images=[];for(var e=0,t=this.elements.length;t>e;e++){var n=this.elements[e];"IMG"===n.nodeName&&this.addImage(n);var r=n.nodeType;if(r&&(1===r||9===r||11===r))for(var i=n.querySelectorAll("img"),o=0,s=i.length;s>o;o++){var a=i[o];this.addImage(a)}}},s.prototype.addImage=function(e){var t=new a(e);this.images.push(t)},s.prototype.check=function(){function e(e,i){return t.options.debug&&f&&l.log("confirm",e,i),t.progress(e),n++,n===r&&t.complete(),!0}var t=this,n=0,r=this.images.length;if(this.hasAnyBroken=!1,!r)return void this.complete();for(var i=0;r>i;i++){var o=this.images[i];o.on("confirm",e),o.check()}},s.prototype.progress=function(e){this.hasAnyBroken=this.hasAnyBroken||!e.isLoaded;var t=this;setTimeout(function(){t.emit("progress",t,e),t.jqDeferred&&t.jqDeferred.notify&&t.jqDeferred.notify(t,e)})},s.prototype.complete=function(){var e=this.hasAnyBroken?"fail":"done";this.isComplete=!0;var t=this;setTimeout(function(){if(t.emit(e,t),t.emit("always",t),t.jqDeferred){var n=t.hasAnyBroken?"reject":"resolve";t.jqDeferred[n](t)}})},c&&(c.fn.imagesLoaded=function(e,t){return new s(this,e,t).jqDeferred.promise(c(this))}),a.prototype=new t,a.prototype.check=function(){var e=p[this.img.src]||new u(this.img.src);if(e.isConfirmed)return void this.confirm(e.isLoaded,"cached was confirmed");if(this.img.complete&&void 0!==this.img.naturalWidth)return void this.confirm(0!==this.img.naturalWidth,"naturalWidth");var t=this;e.on("confirm",function(e,n){return t.confirm(e.isLoaded,n),!0}),e.check()},a.prototype.confirm=function(e,t){this.isLoaded=e,this.emit("confirm",this,t)};var p={};return u.prototype=new t,u.prototype.check=function(){if(!this.isChecked){var e=new Image;n.bind(e,"load",this),n.bind(e,"error",this),e.src=this.src,this.isChecked=!0}},u.prototype.handleEvent=function(e){var t="on"+e.type;this[t]&&this[t](e)},u.prototype.onload=function(e){this.confirm(!0,"onload"),this.unbindProxyEvents(e)},u.prototype.onerror=function(e){this.confirm(!1,"onerror"),this.unbindProxyEvents(e)},u.prototype.confirm=function(e,t){this.isConfirmed=!0,this.isLoaded=e,this.emit("confirm",this,t)},u.prototype.unbindProxyEvents=function(e){n.unbind(e.target,"load",this),n.unbind(e.target,"error",this)},s}),function(){if("ontouchstart"in window){var e,t,n,r,i,o,s={};e=function(e,t){return Math.abs(e[0]-t[0])>5||Math.abs(e[1]-t[1])>5},t=function(e){this.startXY=[e.touches[0].clientX,e.touches[0].clientY],this.threshold=!1},n=function(t){if(this.threshold)return!1;this.threshold=e(this.startXY,[t.touches[0].clientX,t.touches[0].clientY])},r=function(t){if(!this.threshold&&!e(this.startXY,[t.changedTouches[0].clientX,t.changedTouches[0].clientY])){var n=t.changedTouches[0],r=document.createEvent("MouseEvents");r.initMouseEvent("click",!0,!0,window,0,n.screenX,n.screenY,n.clientX,n.clientY,!1,!1,!1,!1,0,null),r.simulated=!0,t.target.dispatchEvent(r)}},i=function(e){var t=Date.now(),n=t-s.time,r=e.clientX,i=e.clientY,a=[Math.abs(s.x-r),Math.abs(s.y-i)],u=o(e.target,"A")||e.target,c=u.nodeName,l="A"===c,f=window.navigator.standalone&&l&&e.target.getAttribute("href");if(s.time=t,s.x=r,s.y=i,(!e.simulated&&(n<500||n<1500&&a[0]<50&&a[1]<50)||f)&&(e.preventDefault(),e.stopPropagation(),!f))return!1;f&&(window.location=u.getAttribute("href")),u&&u.classList&&(u.classList.add("energize-focus"),window.setTimeout(function(){u.classList.remove("energize-focus")},150))},o=function(e,t){for(var n=e;n!==document.body;){if(!n||n.nodeName===t)return n;n=n.parentNode}return null},document.addEventListener("touchstart",t,!1),document.addEventListener("touchmove",n,!1),document.addEventListener("touchend",r,!1),document.addEventListener("click",i,!0)}}(),function(){"use strict";function e(e){if(e&&""!==e){$(".lang-selector a").removeClass("active"),$(".lang-selector a[data-language-name='"+e+"']").addClass("active");for(var t=0;t<a.length;t++)$(".highlight.tab-"+a[t]).hide(),$(".lang-specific."+a[t]).hide();$(".highlight.tab-"+e).show(),$(".lang-specific."+e).show(),window.recacheHeights(),$(window.location.hash).get(0)&&$(window.location.hash).get(0).scrollIntoView(!0)}}function t(e){return"string"!=typeof e?{}:(e=e.trim().replace(/^(\?|#|&)/,""),e?e.split("&").reduce(function(e,t){var n=t.replace(/\+/g," ").split("="),r=n[0],i=n[1];return r=decodeURIComponent(r),i=void 0===i?null:decodeURIComponent(i),e.hasOwnProperty(r)?Array.isArray(e[r])?e[r].push(i):e[r]=[e[r],i]:e[r]=i,e},{}):{})}function n(e){return e?Object.keys(e).sort().map(function(t){var n=e[t];return Array.isArray(n)?n.sort().map(function(e){return encodeURIComponent(t)+"="+encodeURIComponent(e)}).join("&"):encodeURIComponent(t)+"="+encodeURIComponent(n)}).join("&"):""}function r(){if(location.search.length>=1){var e=t(location.search).language;if(e)return e;if(-1!=jQuery.inArray(location.search.substr(1),a))return location.search.substr(1)}return!1}function i(e){var r=t(location.search);return r.language?(r.language=e,n(r)):e}function o(e){if(history){var t=window.location.hash;t&&(t=t.replace(/^#+/,"")),history.pushState({},"","?"+i(e)+"#"+t),localStorage.setItem("language",e)}}function s(t){var n=localStorage.getItem("language");a=t;var i=r();i?(e(i),localStorage.setItem("language",i)):e(null!==n&&-1!=jQuery.inArray(n,a)?n:a[0])}var a=[];window.setupLanguages=s,window.activateLanguage=e,window.getLanguageFromQueryString=r,$(function(){$(".lang-selector a").on("click",function(){var t=$(this).data("language-name");return o(t),e(t),!1})})}(),function(){"use strict";function e(){$("h1, h2").each(function(){var e=$(this),t=e.nextUntil("h1, h2");f.add({id:e.prop("id"),title:e.text(),body:t.text()})}),t()}function t(){f.tokenStore.length>5e3&&(c=300)}function n(){s=$(".content"),a=$(".search-results"),$("#input-search").on("keyup",function(e){!function(){return function(e,t){clearTimeout(l),l=setTimeout(e,t)}}()(function(){r(e)},c)})}function r(e){var t=$("#input-search")[0];if(o(),a.addClass("visible"),27===e.keyCode&&(t.value=""),t.value){var n=f.search(t.value).filter(function(e){return e.score>1e-4});n.length?(a.empty(),$.each(n,function(e,t){var n=document.getElementById(t.ref);a.append("<li><a href='#"+t.ref+"'>"+$(n).text()+"</a></li>")}),i.call(t)):(a.html("<li></li>"),$(".search-results li").text('No Results Found for "'+t.value+'"'))}else o(),a.removeClass("visible")}function i(){this.value&&s.highlight(this.value,u)}function o(){s.unhighlight(u)}var s,a,u={element:"span",className:"search-highlight"},c=0,l=0,f=new lunr.Index;f.ref("id"),f.field("title",{boost:10}),f.field("body"),f.pipeline.add(lunr.trimmer,lunr.stopWordFilter),$(e),$(n)}(),function(){"use strict";function e(e,i,o,s){var a={},u=0,c=0,l=document.title,f=function(){a={},u=$(document).height(),c=$(window).height(),e.find(i).each(function(){var e=$(this).attr("href");"#"===e[0]&&(a[e]=$(e).offset().top)})},d=function(){var n=$(document).scrollTop()+s;n+c>=u&&(n=u+1e3);var r=null;for(var f in a)(a[f]<n&&a[f]>a[r]||null===r)&&(r=f);n!=s||t||(r=window.location.hash,t=!0);var d=e.find("[href='"+r+"']").first();if(!d.hasClass("active")){e.find(".active").removeClass("active"),e.find(".active-parent").removeClass("active-parent"),d.addClass("active"),d.parents(o).addClass("active").siblings(i).addClass("active-parent"),d.siblings(o).addClass("active"),e.find(o).filter(":not(.active)").slideUp(150),e.find(o).filter(".active").slideDown(150),window.history.replaceState&&window.history.replaceState(null,"",r);var p=d.data("title");void 0!==p&&p.length>0?document.title=p+" – "+l:document.title=l}};!function(){f(),d(),$("#nav-button").click(function(){return $(".toc-wrapper").toggleClass("open"),$("#nav-button").toggleClass("open"),!1}),$(".page-wrapper").click(r),$(".toc-link").click(r),e.find(i).click(function(){setTimeout(function(){d()},0)}),$(window).scroll(n(d,200)),$(window).resize(n(f,200))}(),window.recacheHeights=f,window.refreshToc=d}var t=!1,n=function(e,t){var n=!1;return function(){!1===n&&(setTimeout(function(){e(),n=!1},t),n=!0)}},r=function(){$(".toc-wrapper").removeClass("open"),$("#nav-button").removeClass("open")};window.loadToc=e}(),$(function(){loadToc($("#toc"),".toc-link",".toc-list-h2, .toc-list-h3, .toc-list-h4, .toc-list-h5, .toc-list-h6",10),setupLanguages($("body").data("languages")),$(".content").imagesLoaded(function(){window.recacheHeights(),window.refreshToc()})}),window.onpopstate=function(){activateLanguage(getLanguageFromQueryString())};</script>
     
     <meta name="theme-color" content="#F3F7F9" />
-<!-- Renderer: Shins v2.3.2-4 -->
+<!-- Renderer: Shins v2.6.0 -->
+<!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript&quot;,&quot;javascript--nodejs&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;java&quot;,&quot;go&quot;,&quot;php&quot;]">
@@ -1538,22 +1542,22 @@ var n=this.pipeline.run(e.tokenizer(t)),r=new e.Vector,i=[],o=this._fields.reduc
               <ul class="toc-list-h2">
                 
                   <li>
-                    <a href="#findpets" class="toc-h2 toc-link" data-title="findPets">findPets</a>
+                    <a href="#findpets" class="toc-h2 toc-link" data-title="">findPets</a>
                     
                   </li>
                 
                   <li>
-                    <a href="#addpet" class="toc-h2 toc-link" data-title="addPet">addPet</a>
+                    <a href="#addpet" class="toc-h2 toc-link" data-title="">addPet</a>
                     
                   </li>
                 
                   <li>
-                    <a href="#find-pet-by-id" class="toc-h2 toc-link" data-title="find pet by id">find pet by id</a>
+                    <a href="#find-pet-by-id" class="toc-h2 toc-link" data-title="">find pet by id</a>
                     
                   </li>
                 
                   <li>
-                    <a href="#deletepet" class="toc-h2 toc-link" data-title="deletePet">deletePet</a>
+                    <a href="#deletepet" class="toc-h2 toc-link" data-title="">deletePet</a>
                     
                   </li>
                 
@@ -1567,17 +1571,17 @@ var n=this.pipeline.run(e.tokenizer(t)),r=new e.Vector,i=[],o=this._fields.reduc
               <ul class="toc-list-h2">
                 
                   <li>
-                    <a href="#tocspet" class="toc-h2 toc-link" data-title="Pet">Pet</a>
+                    <a href="#tocs_pet" class="toc-h2 toc-link" data-title="">Pet</a>
                     
                   </li>
                 
                   <li>
-                    <a href="#tocsnewpet" class="toc-h2 toc-link" data-title="NewPet">NewPet</a>
+                    <a href="#tocs_newpet" class="toc-h2 toc-link" data-title="">NewPet</a>
                     
                   </li>
                 
                   <li>
-                    <a href="#tocserror" class="toc-h2 toc-link" data-title="Error">Error</a>
+                    <a href="#tocs_error" class="toc-h2 toc-link" data-title="">Error</a>
                     
                   </li>
                 
@@ -1616,40 +1620,22 @@ License: <a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0</
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X GET http://petstore.swagger.io/api/pets \
-  -H <span class="hljs-string">'Accept: application/json'</span>
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span>
 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">http://petstore.swagger.io/api/pets</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: petstore.swagger.io
 <span class="hljs-attribute">Accept</span>: application/json
 
-<span class="undefined"></span></code></pre>
-<pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">var</span> headers = {
-  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>
-
-};
-
-$.ajax({
-  <span class="hljs-attr">url</span>: <span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>,
-  <span class="hljs-attr">method</span>: <span class="hljs-string">'get'</span>,
-
-  <span class="hljs-attr">headers</span>: headers,
-  <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));
-  }
-})
-
 </code></pre>
-<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
-
+<pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>
-
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>
 };
 
-fetch(<span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>,
+fetch(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets&#x27;</span>,
 {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>,
 
   <span class="hljs-attr">headers</span>: headers
 })
@@ -1660,14 +1646,33 @@ fetch(<span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>,
 });
 
 </code></pre>
-<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'rest-client'</span>
-<span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
+<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;node-fetch&#x27;</span>);
+
+<span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>
+};
+
+fetch(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets&#x27;</span>,
+{
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>,
+
+  <span class="hljs-attr">headers</span>: headers
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
+    <span class="hljs-keyword">return</span> res.json();
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(body);
+});
+
+</code></pre>
+<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;rest-client&#x27;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>
 }
 
-result = RestClient.get <span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>,
+result = RestClient.get <span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets&#x27;</span>,
   <span class="hljs-symbol">params:</span> {
   }, <span class="hljs-symbol">headers:</span> headers
 
@@ -1676,19 +1681,17 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>
 }
 
-r = requests.get(<span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>, params={
+r = requests.get(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets&#x27;</span>, headers = headers)
 
-}, headers = headers)
-
-<span class="hljs-keyword">print</span> r.json()
+print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"http://petstore.swagger.io/api/pets"</span>);
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">&quot;http://petstore.swagger.io/api/pets&quot;</span>);
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod(<span class="hljs-string">"GET"</span>);
+con.setRequestMethod(<span class="hljs-string">&quot;GET&quot;</span>);
 <span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
 BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(
     <span class="hljs-keyword">new</span> InputStreamReader(con.getInputStream()));
@@ -1704,19 +1707,18 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-go"><code><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
-       <span class="hljs-string">"bytes"</span>
-       <span class="hljs-string">"net/http"</span>
+       <span class="hljs-string">&quot;bytes&quot;</span>
+       <span class="hljs-string">&quot;net/http&quot;</span>
 )
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
-        
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
     }
 
     data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
-    req, err := http.NewRequest(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"http://petstore.swagger.io/api/pets"</span>, data)
+    req, err := http.NewRequest(<span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;http://petstore.swagger.io/api/pets&quot;</span>, data)
     req.Header = headers
 
     client := &amp;http.Client{}
@@ -1725,26 +1727,25 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
-    
-    );
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
+);
 
-$client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
+<span class="hljs-variable">$client</span> = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 
 <span class="hljs-comment">// Define array of request body.</span>
-$request_body = <span class="hljs-keyword">array</span>();
+<span class="hljs-variable">$request_body</span> = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>, <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">'headers'</span> =&gt; $headers,
-        <span class="hljs-string">'json'</span> =&gt; $request_body,
+    <span class="hljs-variable">$response</span> = <span class="hljs-variable">$client</span>-&gt;request(<span class="hljs-string">&#x27;GET&#x27;</span>,<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets&#x27;</span>, <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&#x27;headers&#x27;</span> =&gt; <span class="hljs-variable">$headers</span>,
+        <span class="hljs-string">&#x27;json&#x27;</span> =&gt; <span class="hljs-variable">$request_body</span>,
        )
     );
-    print_r($response-&gt;getBody()-&gt;getContents());
+    print_r(<span class="hljs-variable">$response</span>-&gt;getBody()-&gt;getContents());
  }
- <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
+ <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-built_in">Exception</span>\BadResponseException <span class="hljs-variable">$e</span>) {
     <span class="hljs-comment">// handle exception or api errors.</span>
-    print_r($e-&gt;getMessage());
+    print_r(<span class="hljs-variable">$e</span>-&gt;getMessage());
  }
 
  <span class="hljs-comment">// ...</span>
@@ -1789,11 +1790,7 @@ Nam sed condimentum est. Maecenas tempor sagittis sapien, nec rhoncus sem sagitt
 <p>200 Response</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>[
-  {
-    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"string"</span>,
-    <span class="hljs-attr">"tag"</span>: <span class="hljs-string">"string"</span>,
-    <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>
-  }
+  <span class="hljs-literal">null</span>
 ]
 </code></pre>
 <h3 id="findpets-responses">Responses</h3>
@@ -1916,8 +1913,8 @@ This operation does not require authentication
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X POST http://petstore.swagger.io/api/pets \
-  -H <span class="hljs-string">'Content-Type: application/json'</span> \
-  -H <span class="hljs-string">'Accept: application/json'</span>
+  -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span>
 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">POST</span> <span class="hljs-string">http://petstore.swagger.io/api/pets</span> HTTP/1.1
@@ -1925,38 +1922,19 @@ curl -X POST http://petstore.swagger.io/api/pets \
 <span class="hljs-attribute">Content-Type</span>: application/json
 <span class="hljs-attribute">Accept</span>: application/json
 
-<span class="undefined"></span></code></pre>
-<pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">var</span> headers = {
-  <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>
-
-};
-
-$.ajax({
-  <span class="hljs-attr">url</span>: <span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>,
-  <span class="hljs-attr">method</span>: <span class="hljs-string">'post'</span>,
-
-  <span class="hljs-attr">headers</span>: headers,
-  <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));
-  }
-})
-
 </code></pre>
-<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
-<span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">'{
-  "name": "string",
-  "tag": "string"
-}'</span>;
+<pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;tag&quot;: &quot;string&quot;
+}&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>
-
+  <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>
 };
 
-fetch(<span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>,
+fetch(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets&#x27;</span>,
 {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">body</span>: inputBody,
   <span class="hljs-attr">headers</span>: headers
 })
@@ -1967,15 +1945,38 @@ fetch(<span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>,
 });
 
 </code></pre>
-<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'rest-client'</span>
-<span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
+<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;node-fetch&#x27;</span>);
+<span class="hljs-keyword">const</span> inputBody = {
+  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+  <span class="hljs-string">&quot;tag&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
+};
+<span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>
+};
+
+fetch(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets&#x27;</span>,
+{
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+  <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(inputBody),
+  <span class="hljs-attr">headers</span>: headers
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
+    <span class="hljs-keyword">return</span> res.json();
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(body);
+});
+
+</code></pre>
+<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;rest-client&#x27;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">'Content-Type'</span> =&gt; <span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>
+  <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>
 }
 
-result = RestClient.post <span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>,
+result = RestClient.post <span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets&#x27;</span>,
   <span class="hljs-symbol">params:</span> {
   }, <span class="hljs-symbol">headers:</span> headers
 
@@ -1984,20 +1985,18 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>
+  <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>
 }
 
-r = requests.post(<span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>, params={
+r = requests.post(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets&#x27;</span>, headers = headers)
 
-}, headers = headers)
-
-<span class="hljs-keyword">print</span> r.json()
+print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"http://petstore.swagger.io/api/pets"</span>);
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">&quot;http://petstore.swagger.io/api/pets&quot;</span>);
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod(<span class="hljs-string">"POST"</span>);
+con.setRequestMethod(<span class="hljs-string">&quot;POST&quot;</span>);
 <span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
 BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(
     <span class="hljs-keyword">new</span> InputStreamReader(con.getInputStream()));
@@ -2013,20 +2012,19 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-go"><code><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
-       <span class="hljs-string">"bytes"</span>
-       <span class="hljs-string">"net/http"</span>
+       <span class="hljs-string">&quot;bytes&quot;</span>
+       <span class="hljs-string">&quot;net/http&quot;</span>
 )
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">"Content-Type"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
-        <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
-        
+        <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
     }
 
     data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
-    req, err := http.NewRequest(<span class="hljs-string">"POST"</span>, <span class="hljs-string">"http://petstore.swagger.io/api/pets"</span>, data)
+    req, err := http.NewRequest(<span class="hljs-string">&quot;POST&quot;</span>, <span class="hljs-string">&quot;http://petstore.swagger.io/api/pets&quot;</span>, data)
     req.Header = headers
 
     client := &amp;http.Client{}
@@ -2035,27 +2033,26 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
-    <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
-    
-    );
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
+    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
+);
 
-$client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
+<span class="hljs-variable">$client</span> = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 
 <span class="hljs-comment">// Define array of request body.</span>
-$request_body = <span class="hljs-keyword">array</span>();
+<span class="hljs-variable">$request_body</span> = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'POST'</span>,<span class="hljs-string">'http://petstore.swagger.io/api/pets'</span>, <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">'headers'</span> =&gt; $headers,
-        <span class="hljs-string">'json'</span> =&gt; $request_body,
+    <span class="hljs-variable">$response</span> = <span class="hljs-variable">$client</span>-&gt;request(<span class="hljs-string">&#x27;POST&#x27;</span>,<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets&#x27;</span>, <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&#x27;headers&#x27;</span> =&gt; <span class="hljs-variable">$headers</span>,
+        <span class="hljs-string">&#x27;json&#x27;</span> =&gt; <span class="hljs-variable">$request_body</span>,
        )
     );
-    print_r($response-&gt;getBody()-&gt;getContents());
+    print_r(<span class="hljs-variable">$response</span>-&gt;getBody()-&gt;getContents());
  }
- <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
+ <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-built_in">Exception</span>\BadResponseException <span class="hljs-variable">$e</span>) {
     <span class="hljs-comment">// handle exception or api errors.</span>
-    print_r($e-&gt;getMessage());
+    print_r(<span class="hljs-variable">$e</span>-&gt;getMessage());
  }
 
  <span class="hljs-comment">// ...</span>
@@ -2067,8 +2064,8 @@ $request_body = <span class="hljs-keyword">array</span>();
 <p>Body parameter</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"tag"</span>: <span class="hljs-string">"string"</span>
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+  <span class="hljs-attr">&quot;tag&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
 }
 </code></pre>
 <h3 id="addpet-parameters">Parameters</h3>
@@ -2098,11 +2095,7 @@ $request_body = <span class="hljs-keyword">array</span>();
 <blockquote>
 <p>200 Response</p>
 </blockquote>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"tag"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>
-}
+<pre class="highlight tab tab-json"><code><span class="hljs-literal">null</span>
 </code></pre>
 <h3 id="addpet-responses">Responses</h3>
 <table>
@@ -2139,40 +2132,22 @@ This operation does not require authentication
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X GET http://petstore.swagger.io/api/pets/{id} \
-  -H <span class="hljs-string">'Accept: application/json'</span>
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span>
 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">http://petstore.swagger.io/api/pets/{id}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: petstore.swagger.io
 <span class="hljs-attribute">Accept</span>: application/json
 
-<span class="undefined"></span></code></pre>
-<pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">var</span> headers = {
-  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>
-
-};
-
-$.ajax({
-  <span class="hljs-attr">url</span>: <span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span>,
-  <span class="hljs-attr">method</span>: <span class="hljs-string">'get'</span>,
-
-  <span class="hljs-attr">headers</span>: headers,
-  <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));
-  }
-})
-
 </code></pre>
-<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
-
+<pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>
-
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>
 };
 
-fetch(<span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span>,
+fetch(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets/{id}&#x27;</span>,
 {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>,
 
   <span class="hljs-attr">headers</span>: headers
 })
@@ -2183,14 +2158,33 @@ fetch(<span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span
 });
 
 </code></pre>
-<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'rest-client'</span>
-<span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
+<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;node-fetch&#x27;</span>);
+
+<span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>
+};
+
+fetch(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets/{id}&#x27;</span>,
+{
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>,
+
+  <span class="hljs-attr">headers</span>: headers
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
+    <span class="hljs-keyword">return</span> res.json();
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(body);
+});
+
+</code></pre>
+<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;rest-client&#x27;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>
 }
 
-result = RestClient.get <span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span>,
+result = RestClient.get <span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets/{id}&#x27;</span>,
   <span class="hljs-symbol">params:</span> {
   }, <span class="hljs-symbol">headers:</span> headers
 
@@ -2199,19 +2193,17 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>
 }
 
-r = requests.get(<span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span>, params={
+r = requests.get(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets/{id}&#x27;</span>, headers = headers)
 
-}, headers = headers)
-
-<span class="hljs-keyword">print</span> r.json()
+print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"http://petstore.swagger.io/api/pets/{id}"</span>);
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">&quot;http://petstore.swagger.io/api/pets/{id}&quot;</span>);
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod(<span class="hljs-string">"GET"</span>);
+con.setRequestMethod(<span class="hljs-string">&quot;GET&quot;</span>);
 <span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
 BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(
     <span class="hljs-keyword">new</span> InputStreamReader(con.getInputStream()));
@@ -2227,19 +2219,18 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-go"><code><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
-       <span class="hljs-string">"bytes"</span>
-       <span class="hljs-string">"net/http"</span>
+       <span class="hljs-string">&quot;bytes&quot;</span>
+       <span class="hljs-string">&quot;net/http&quot;</span>
 )
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
-        
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
     }
 
     data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
-    req, err := http.NewRequest(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"http://petstore.swagger.io/api/pets/{id}"</span>, data)
+    req, err := http.NewRequest(<span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;http://petstore.swagger.io/api/pets/{id}&quot;</span>, data)
     req.Header = headers
 
     client := &amp;http.Client{}
@@ -2248,26 +2239,25 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
-    
-    );
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
+);
 
-$client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
+<span class="hljs-variable">$client</span> = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 
 <span class="hljs-comment">// Define array of request body.</span>
-$request_body = <span class="hljs-keyword">array</span>();
+<span class="hljs-variable">$request_body</span> = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span>, <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">'headers'</span> =&gt; $headers,
-        <span class="hljs-string">'json'</span> =&gt; $request_body,
+    <span class="hljs-variable">$response</span> = <span class="hljs-variable">$client</span>-&gt;request(<span class="hljs-string">&#x27;GET&#x27;</span>,<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets/{id}&#x27;</span>, <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&#x27;headers&#x27;</span> =&gt; <span class="hljs-variable">$headers</span>,
+        <span class="hljs-string">&#x27;json&#x27;</span> =&gt; <span class="hljs-variable">$request_body</span>,
        )
     );
-    print_r($response-&gt;getBody()-&gt;getContents());
+    print_r(<span class="hljs-variable">$response</span>-&gt;getBody()-&gt;getContents());
  }
- <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
+ <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-built_in">Exception</span>\BadResponseException <span class="hljs-variable">$e</span>) {
     <span class="hljs-comment">// handle exception or api errors.</span>
-    print_r($e-&gt;getMessage());
+    print_r(<span class="hljs-variable">$e</span>-&gt;getMessage());
  }
 
  <span class="hljs-comment">// ...</span>
@@ -2302,11 +2292,7 @@ $request_body = <span class="hljs-keyword">array</span>();
 <blockquote>
 <p>200 Response</p>
 </blockquote>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"tag"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>
-}
+<pre class="highlight tab tab-json"><code><span class="hljs-literal">null</span>
 </code></pre>
 <h3 id="find-pet-by-id-responses">Responses</h3>
 <table>
@@ -2343,40 +2329,22 @@ This operation does not require authentication
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X DELETE http://petstore.swagger.io/api/pets/{id} \
-  -H <span class="hljs-string">'Accept: application/json'</span>
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span>
 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">DELETE</span> <span class="hljs-string">http://petstore.swagger.io/api/pets/{id}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: petstore.swagger.io
 <span class="hljs-attribute">Accept</span>: application/json
 
-<span class="undefined"></span></code></pre>
-<pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">var</span> headers = {
-  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>
-
-};
-
-$.ajax({
-  <span class="hljs-attr">url</span>: <span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span>,
-  <span class="hljs-attr">method</span>: <span class="hljs-string">'delete'</span>,
-
-  <span class="hljs-attr">headers</span>: headers,
-  <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));
-  }
-})
-
 </code></pre>
-<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-fetch'</span>);
-
+<pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>
-
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>
 };
 
-fetch(<span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span>,
+fetch(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets/{id}&#x27;</span>,
 {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">'DELETE'</span>,
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;DELETE&#x27;</span>,
 
   <span class="hljs-attr">headers</span>: headers
 })
@@ -2387,14 +2355,33 @@ fetch(<span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span
 });
 
 </code></pre>
-<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">'rest-client'</span>
-<span class="hljs-keyword">require</span> <span class="hljs-string">'json'</span>
+<pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;node-fetch&#x27;</span>);
+
+<span class="hljs-keyword">const</span> headers = {
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>
+};
+
+fetch(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets/{id}&#x27;</span>,
+{
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;DELETE&#x27;</span>,
+
+  <span class="hljs-attr">headers</span>: headers
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
+    <span class="hljs-keyword">return</span> res.json();
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(body);
+});
+
+</code></pre>
+<pre class="highlight tab tab-ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;rest-client&#x27;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>
 }
 
-result = RestClient.delete <span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span>,
+result = RestClient.delete <span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets/{id}&#x27;</span>,
   <span class="hljs-symbol">params:</span> {
   }, <span class="hljs-symbol">headers:</span> headers
 
@@ -2403,19 +2390,17 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>
 }
 
-r = requests.delete(<span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span>, params={
+r = requests.delete(<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets/{id}&#x27;</span>, headers = headers)
 
-}, headers = headers)
-
-<span class="hljs-keyword">print</span> r.json()
+print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"http://petstore.swagger.io/api/pets/{id}"</span>);
+<pre class="highlight tab tab-java"><code>URL obj = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">&quot;http://petstore.swagger.io/api/pets/{id}&quot;</span>);
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod(<span class="hljs-string">"DELETE"</span>);
+con.setRequestMethod(<span class="hljs-string">&quot;DELETE&quot;</span>);
 <span class="hljs-keyword">int</span> responseCode = con.getResponseCode();
 BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(
     <span class="hljs-keyword">new</span> InputStreamReader(con.getInputStream()));
@@ -2431,19 +2416,18 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-go"><code><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
-       <span class="hljs-string">"bytes"</span>
-       <span class="hljs-string">"net/http"</span>
+       <span class="hljs-string">&quot;bytes&quot;</span>
+       <span class="hljs-string">&quot;net/http&quot;</span>
 )
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
-        
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
     }
 
     data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
-    req, err := http.NewRequest(<span class="hljs-string">"DELETE"</span>, <span class="hljs-string">"http://petstore.swagger.io/api/pets/{id}"</span>, data)
+    req, err := http.NewRequest(<span class="hljs-string">&quot;DELETE&quot;</span>, <span class="hljs-string">&quot;http://petstore.swagger.io/api/pets/{id}&quot;</span>, data)
     req.Header = headers
 
     client := &amp;http.Client{}
@@ -2452,26 +2436,25 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">'application/json'</span>,
-    
-    );
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
+);
 
-$client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
+<span class="hljs-variable">$client</span> = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
 
 <span class="hljs-comment">// Define array of request body.</span>
-$request_body = <span class="hljs-keyword">array</span>();
+<span class="hljs-variable">$request_body</span> = <span class="hljs-keyword">array</span>();
 
 <span class="hljs-keyword">try</span> {
-    $response = $client-&gt;request(<span class="hljs-string">'DELETE'</span>,<span class="hljs-string">'http://petstore.swagger.io/api/pets/{id}'</span>, <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">'headers'</span> =&gt; $headers,
-        <span class="hljs-string">'json'</span> =&gt; $request_body,
+    <span class="hljs-variable">$response</span> = <span class="hljs-variable">$client</span>-&gt;request(<span class="hljs-string">&#x27;DELETE&#x27;</span>,<span class="hljs-string">&#x27;http://petstore.swagger.io/api/pets/{id}&#x27;</span>, <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&#x27;headers&#x27;</span> =&gt; <span class="hljs-variable">$headers</span>,
+        <span class="hljs-string">&#x27;json&#x27;</span> =&gt; <span class="hljs-variable">$request_body</span>,
        )
     );
-    print_r($response-&gt;getBody()-&gt;getContents());
+    print_r(<span class="hljs-variable">$response</span>-&gt;getBody()-&gt;getContents());
  }
- <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-keyword">Exception</span>\BadResponseException $e) {
+ <span class="hljs-keyword">catch</span> (\GuzzleHttp\<span class="hljs-built_in">Exception</span>\BadResponseException <span class="hljs-variable">$e</span>) {
     <span class="hljs-comment">// handle exception or api errors.</span>
-    print_r($e-&gt;getMessage());
+    print_r(<span class="hljs-variable">$e</span>-&gt;getMessage());
  }
 
  <span class="hljs-comment">// ...</span>
@@ -2507,8 +2490,8 @@ $request_body = <span class="hljs-keyword">array</span>();
 <p>default Response</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"code"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"string"</span>
+  <span class="hljs-attr">&quot;code&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">&quot;message&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
 }
 </code></pre>
 <h3 id="deletepet-responses">Responses</h3>
@@ -2540,17 +2523,16 @@ $request_body = <span class="hljs-keyword">array</span>();
 This operation does not require authentication
 </aside>
 <h1 id="schemas">Schemas</h1>
-<h2 id="tocspet">Pet</h2>
-<p><a id="schemapet"></a></p>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"tag"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>
-}
+<h2 id="tocs_pet">Pet</h2>
+<p><a id="schemapet"></a>
+<a id="schema_Pet"></a>
+<a id="tocSpet"></a>
+<a id="tocspet"></a></p>
+<pre class="highlight tab tab-json"><code><span class="hljs-literal">null</span>
 
 </code></pre>
 <h3 id="properties">Properties</h3>
-<p><em>allOf</em></p>
+<p>allOf</p>
 <table>
 <thead>
 <tr>
@@ -2571,7 +2553,7 @@ This operation does not require authentication
 </tr>
 </tbody>
 </table>
-<p><em>and</em></p>
+<p>and</p>
 <table>
 <thead>
 <tr>
@@ -2599,15 +2581,18 @@ This operation does not require authentication
 </tr>
 </tbody>
 </table>
-<h2 id="tocsnewpet">NewPet</h2>
-<p><a id="schemanewpet"></a></p>
+<h2 id="tocs_newpet">NewPet</h2>
+<p><a id="schemanewpet"></a>
+<a id="schema_NewPet"></a>
+<a id="tocSnewpet"></a>
+<a id="tocsnewpet"></a></p>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"tag"</span>: <span class="hljs-string">"string"</span>
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+  <span class="hljs-attr">&quot;tag&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
 }
 
 </code></pre>
-<h3 id="properties">Properties</h3>
+<h3 id="properties-2">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -2635,15 +2620,18 @@ This operation does not require authentication
 </tr>
 </tbody>
 </table>
-<h2 id="tocserror">Error</h2>
-<p><a id="schemaerror"></a></p>
+<h2 id="tocs_error">Error</h2>
+<p><a id="schemaerror"></a>
+<a id="schema_Error"></a>
+<a id="tocSerror"></a>
+<a id="tocserror"></a></p>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"code"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"string"</span>
+  <span class="hljs-attr">&quot;code&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">&quot;message&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
 }
 
 </code></pre>
-<h3 id="properties">Properties</h3>
+<h3 id="properties-3">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -2671,7 +2659,11 @@ This operation does not require authentication
 </tr>
 </tbody>
 </table>
-<!-- Renderer: Shins v2.3.2-4 -->
+<!-- Renderer: Shins v2.6.0 -->
+<!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
       </div>
       <div class="dark-box">
         
