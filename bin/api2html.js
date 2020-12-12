@@ -28,7 +28,6 @@ const icons = {
     fail: "✗"
 };
 
-
 async function main() {
 
     program
@@ -169,7 +168,6 @@ async function main() {
                     const markdownString = await converter.convert(api, options);
 
                     console.log(chalk.green(icons.ok) + " Converted OpenAPI docs to markdown!");
-
 
                     // Render the markdown as HTML and inline all the assets
                     shins.render(markdownString, shinOptions, (err, html) => {
