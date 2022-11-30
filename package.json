@@ -1,6 +1,6 @@
 {
   "name": "api2html",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A CLI tool to transform Swagger/OpenAPI/AsyncAPI docs to beautiful HTML pages via Shins/Widdershins",
   "main": "bin/api2html.js",
   "scripts": {
@@ -37,9 +37,9 @@
   },
   "homepage": "https://github.com/tobilg/api2html#readme",
   "dependencies": {
-    "chalk": "^4.1.0",
-    "commander": "^6.2.0",
-    "js-yaml": "^3.14.1",
+    "chalk": "^4.1.2",
+    "commander": "^9.4.1",
+    "js-yaml": "^4.1.0",
     "mkdirp": "^1.0.4",
     "shins": "^2.6.0",
     "widdershins": "^4.0.1"
