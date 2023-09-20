@@ -46,6 +46,7 @@ Usage: api2html [options] <sourcePath>
     -P, --customCssPath <cssPath>   use custom css file
     -i, --includes <includesList>   comma-separated list of files to include
     -l, --languages <languageList>  comma-separated list of languages to use for the language tabs (out of shell, http, javascript, javascript--nodejs, ruby, python, java, go)
+    -N, --noCodeSamples             omit all code samples (overrides --languages)
     -s, --search                    enable search
     -S, --summary                   use summary instead of operationId for TOC
     -b, --omitBody                  Omit top-level fake body parameter object

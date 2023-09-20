@@ -42,6 +42,7 @@ async function main() {
         .option("-P, --customCssPath <cssPath>", "use custom css file")
         .option("-i, --includes <includesList>", "comma-separated list of files to include")
         .option("-l, --languages <languageList>", "comma-separated list of languages to use for the language tabs (out of " + Object.getOwnPropertyNames(languageMap).join(", ") + ")")
+        .option("-N, --noCodeSamples", "omit all code samples (overrides --languages)")
         .option("-s, --search", "enable search")
         .option("-S, --summary", "use summary instead of operationId for TOC")
         .option("-b, --omitBody", "Omit top-level fake body parameter object")
@@ -62,7 +63,7 @@ async function main() {
         // Widdershin options
         let options = {};
 
-        options.codeSamples = true;
+        options.codeSamples = !program.noCodeSamples
         options.httpsnippet = false;
         options.theme = program.theme ? program.theme.toLowerCase() : "darkula";
         options.search = program.search || true;
@@ -75,12 +76,13 @@ async function main() {
         options.language_tabs = [];
         options.sample = !program.raw;
 
-        // Default languages: All
-        Object.getOwnPropertyNames(languageMap).forEach((lang) => {
-            let obj = {};
-            obj[lang] = languageMap[lang];
-            options.language_tabs.push(obj);
-        });
+        if (!program.noCodeSamples)
+            // Default languages: All
+            Object.getOwnPropertyNames(languageMap).forEach((lang) => {
+                let obj = {};
+                obj[lang] = languageMap[lang];
+                options.language_tabs.push(obj);
+            });
 
         if (program.resolve) {
             options.resolve = true;
