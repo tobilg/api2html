@@ -1,0 +1,29 @@
+on:
+  workflow_dispatch:
+
+  push:
+    tags:        
+      - 'v*'
+
+jobs:
+
+  checkout_and_create_new_version:
+    name: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Publish new package version
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          # Publish new version to npm registry
+          npm publish
